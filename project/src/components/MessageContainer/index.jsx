@@ -1,8 +1,8 @@
-import React, {useEffect, useState} from "react";
+import React, {useEffect} from "react";
 import MessageItem from "../MessageItem";
 import styles from './MessageContainer.module.css'
 import {useDispatch, useSelector} from "react-redux";
-import {fetchPosts, readPost} from "../../redux/slices/postSlice";
+import {clearPosts, fetchPosts} from "../../redux/slices/postSlice";
 
 
 
@@ -11,7 +11,9 @@ const MessageContainer = () => {
     const items = useSelector(state => state.posts.posts);
     const totalCount = items.length;
     const readCount = useSelector(state => state.posts.readPostsCount)
-
+    const clearItems = () => {
+        dispatch(clearPosts())
+    }
    useEffect(() => {
        dispatch(fetchPosts());
    }, [dispatch])
@@ -27,7 +29,7 @@ const MessageContainer = () => {
                     {readCount.length}
                 </span>
            </div>
-           <p className={styles.link}>Mark all as read</p>
+           <p onClick={clearItems} className={styles.link}>Mark all as read</p>
            {
                items.map((obj) => <MessageItem {...obj} key={obj.id}/>)
            }

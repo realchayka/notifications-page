@@ -20,6 +20,8 @@ const MessageItem = ({createdAt, name, avatar, post, read, id}) => {
         }
         dispatch(readPost(postItem))
     }
+
+
     return (
         <>
             {

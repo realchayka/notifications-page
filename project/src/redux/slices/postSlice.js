@@ -24,13 +24,18 @@ const postSlice = createSlice({
 
            const findItem = state.readPostsCount.find(obj => obj.id == action.payload.id)
 
-
             if(findItem){
                 console.log('Уже прочитано')
             } else {
+                action.payload.read = true
+                console.log(action.payload)
                 state.readPostsCount.push(action.payload)
                 console.log('Запушили:)')
             }
+        },
+        clearPosts(state){
+            state.readPostsCount = []
+            console.log('Очистили :)')
         }
     },
     extraReducers: {
@@ -48,7 +53,7 @@ const postSlice = createSlice({
     },
 })
 
-export const {readPost} = postSlice.actions;
+export const {readPost, clearPosts} = postSlice.actions;
 
 
 export default postSlice.reducer

@@ -23,7 +23,7 @@
     font-size: 18px;
     margin-top: 10px;
     color:hsl(219, 12%, 42%);
-
+    cursor: pointer;
 }
 @media (max-width: 390px){
     .link {
