@@ -11,12 +11,10 @@ const MessageContainer = () => {
     const items = useSelector(state => state.posts.posts);
     const totalCount = items.length;
     const readCount = useSelector(state => state.posts.readPostsCount)
-    const handleReadPost = (id) => {
-        dispatch(readPost(id))
-    }
+
    useEffect(() => {
        dispatch(fetchPosts());
-   }, [dispatch, handleReadPost])
+   }, [dispatch])
 
 
     return (
@@ -31,7 +29,7 @@ const MessageContainer = () => {
            </div>
            <p className={styles.link}>Mark all as read</p>
            {
-               items.map((obj, i) => <MessageItem onClick={id => handleReadPost(id)} {...obj} key={i}/>)
+               items.map((obj) => <MessageItem {...obj} key={obj.id}/>)
            }
        </div>
     );

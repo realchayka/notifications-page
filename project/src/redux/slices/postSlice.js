@@ -21,7 +21,16 @@ const postSlice = createSlice({
     },
     reducers: {
         readPost(state,action){
-            state.readPostsCount.push(action.payload)
+
+           const findItem = state.readPostsCount.find(obj => obj.id == action.payload.id)
+
+
+            if(findItem){
+                console.log('Уже прочитано')
+            } else {
+                state.readPostsCount.push(action.payload)
+                console.log('Запушили:)')
+            }
         }
     },
     extraReducers: {

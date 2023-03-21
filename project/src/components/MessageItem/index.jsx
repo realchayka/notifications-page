@@ -1,12 +1,25 @@
 import React from "react";
 import styles from './MessageItem.module.css'
+import {useDispatch, useSelector} from "react-redux";
+import {readPost} from "../../redux/slices/postSlice";
 
 
 
 
-const MessageItem = ({createdAt, name, avatar, post, read}) => {
+const MessageItem = ({createdAt, name, avatar, post, read, id}) => {
     const [open, setOpen] = React.useState(false);
-
+    const dispatch = useDispatch()
+    const postRead =() => {
+        const postItem = {
+            id,
+            read,
+            post,
+            avatar,
+            name,
+            createdAt
+        }
+        dispatch(readPost(postItem))
+    }
     return (
         <>
             {
@@ -22,7 +35,7 @@ const MessageItem = ({createdAt, name, avatar, post, read}) => {
                         }
                     </div>
                 </div>) :
-                    ((<div className={styles.wrapper}>
+                    ((<div onClick={postRead} className={styles.wrapper}>
                         <div className={styles.wrapper__left}>
                             <img className={styles.avatar} src={avatar} />
                         </div>
